@@ -42,4 +42,4 @@ owsTasks('owsNode', 'submodule', {skipBrowsers: true});
 
 Code released under [the MIT license](https://github.com/owstack/ows-build/blob/master/LICENSE).
 
-Copyright 2017 Open Wallet Stack. Bcccore is a trademark maintained by Open Wallet Stack.
+Copyright 2017 Open Wallet Stack.
