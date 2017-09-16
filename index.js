@@ -64,7 +64,7 @@ function startGulp(node, name, opts) {
   var tests = ['test/**/*.js'];
   var alljs = files.concat(tests);
 
-  var buildPath = './node_modules/' + node + '-build/';
+  var buildPath = './node_modules/ows-build/';
   var buildModulesPath = buildPath + 'node_modules/';
   var buildBinPath = buildPath + 'node_modules/.bin/';
 
