@@ -1,6 +1,8 @@
 OWS Build
 =======
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/owstack/ows-build.svg)](https://greenkeeper.io/)
+
 A helper to add tasks to gulp.
 
 ## Attribution
