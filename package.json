@@ -1,5 +1,5 @@
 {
-  "name": "ows-build",
+  "name": "@owstack/ows-build",
   "version": "0.0.1",
   "description": "A helper for common tasks to build OWS modules'",
   "main": "index.js",
