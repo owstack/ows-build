@@ -3,10 +3,6 @@ OWS Build
 
 A helper to add tasks to gulp.
 
-## Attribution
-
-This repository was created by copy forking [bitcore-build 6747a4a](https://github.com/bitpay/bitcore-build/commit/6747a4a15a0154de294d2591c5603969ad30eea1).
-
 ## Getting started
 
 Install with:
