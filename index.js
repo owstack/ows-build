@@ -17,8 +17,8 @@
  * </ul>`
  * <li> `browser` - generate files needed for browser (browserify)
  * <ul>
- * <li> `browser:uncompressed` - build uncomprssed browser bundle (e.g., `btccore-*.js`)
- * <li> `browser:compressed` - build compressed browser bundle (e.g., `btccore-*.min.js`)
+ * <li> `browser:uncompressed` - build uncomprssed browser bundle (e.g., `btc-lib-*.js`)
+ * <li> `browser:compressed` - build compressed browser bundle (e.g., `btc-lib-*.min.js`)
  * <li> `browser:maketests` - build `tests.js`, needed for testing without karma
  * </ul>`
  * <li> `lint` - run `jshint`
