@@ -17,13 +17,13 @@ and use and require in your gulp file:
 var gulp = require('gulp');
 var owsTasks = require('@owstack/ows-build');
 
-owsTasks('owsNode', 'submodule');
+owsTasks('owsnode', 'submodule');
 gulp.task('default', ['lint', 'test', 'browser', 'coverage']);
 ```
 
-where `owsNode` is one of the available OWS nodes:
-- bcccore
-- btccore
+where `owsnode` is one of the available OWS nodes:
+- bch
+- btc
 
 ### Notes
 
@@ -31,7 +31,7 @@ where `owsNode` is one of the available OWS nodes:
 * If the module is node-only, avoid adding the browser tasks with:
 ```javascript
 var owsTasks = require('@owstack/ows-build');
-owsTasks('owsNode', 'submodule', {skipBrowsers: true});
+owsTasks('owsnode', 'submodule', {skipBrowsers: true});
 ```
 
 ## License
