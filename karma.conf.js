@@ -4,7 +4,7 @@
 module.exports = function(config) {
 
   config.set({
-    browsers: ['PhantomJS'],
+    browsers: ['ChromeHeadless'],
     frameworks: ['mocha'],
     singleRun: true,
     files: [
@@ -12,7 +12,7 @@ module.exports = function(config) {
     ],
     plugins: [
       'karma-mocha',
-      'karma-phantomjs-launcher'
+      'karma-chrome-launcher'
     ]
   });
 

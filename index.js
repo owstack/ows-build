@@ -45,7 +45,7 @@ var git = require('gulp-git');
 var fs = require('fs');
 
 function ignoreerror() {
-  /* jshint ignore:start */ // using `this` in this context is weird 
+  /* jshint ignore:start */ // using `this` in this context is weird
   this.emit('end');
   /* jshint ignore:end */
 }
@@ -66,7 +66,7 @@ function startGulp(node, name, opts) {
 
   var buildPath = './node_modules/@owstack/ows-build/';
   var buildModulesPath = buildPath + 'node_modules/';
-  var buildBinPath = buildPath + 'node_modules/.bin/';
+  var buildBinPath = buildModulesPath + '.bin/';
 
   var browserifyPath = buildBinPath + 'browserify';
   var karmaPath = buildBinPath + 'karma';
@@ -75,9 +75,9 @@ function startGulp(node, name, opts) {
   var mochaPath = buildBinPath + '_mocha';
 
   // newer version of node? binaries are in lower level of node_module path
-  if (!fs.existsSync(browserifyPath)) {
-    browserifyPath = './node_modules/.bin/browserify';
-  } 
+  // if (!fs.existsSync(browserifyPath)) {
+  //   browserifyPath = './node_modules/.bin/browserify';
+  // } 
 
   if (!fs.existsSync(karmaPath)) {
     karmaPath = './node_modules/.bin/karma';
@@ -357,7 +357,7 @@ function startGulp(node, name, opts) {
       bumper,
       // build browser files
       browser ? 'browser' : 'noop',
-      // Commit 
+      // Commit
       'release:build-commit',
       // Run git push owstack $VERSION
       'release:push-tag',
