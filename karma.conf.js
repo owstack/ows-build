@@ -6,7 +6,7 @@ process.env.CHROME_BIN = require('puppeteer').executablePath()
 module.exports = function(config) {
 
   config.set({
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessNoSB'],
     frameworks: ['mocha'],
     singleRun: true,
     files: [
@@ -15,7 +15,18 @@ module.exports = function(config) {
     plugins: [
       'karma-mocha',
       'karma-chrome-launcher'
-    ]
+    ],
+    customLaunchers: {
+      ChromeHeadlessNoSB: {
+        base: 'Chrome',
+        flags: [
+          '--disable-gpu',
+          '--headless',
+          '--no-sandbox',
+          '--remote-debugging-port=9222',
+        ],
+      },
+    }
   });
 
 };
