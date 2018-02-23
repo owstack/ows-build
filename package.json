@@ -1,6 +1,6 @@
 {
   "name": "@owstack/ows-build",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A helper for common tasks to build OWS modules'",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/owstack/ows-build",
   "dependencies": {
     "brfs": "^1.4.3",
-    "browserify": "^13.1.1",
+    "browserify": "^16.1.0",
     "chai": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.7.0",
