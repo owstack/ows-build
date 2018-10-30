@@ -8,10 +8,10 @@ A helper to add tasks to gulp.
 Install with:
 
 ```sh
-npm install ows-build
+npm install @owstack/ows-build
 ```
 
-and use and require in your gulp file: 
+and use and require in your gulp file:
 
 ```javascript
 var gulp = require('gulp');
