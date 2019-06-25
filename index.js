@@ -35,8 +35,6 @@ var coveralls = require('@kollavarsham/gulp-coveralls');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var rename = require('gulp-rename');
-var runsequence = require('run-sequence');
-runsequence.use(gulp);
 var shell = require('gulp-shell');
 var uglify = require('gulp-uglify');
 var bump = require('gulp-bump');
@@ -108,13 +106,8 @@ function startGulp(node, name, opts) {
     return testmocha().on('error', ignoreerror);
   });
 
-  gulp.task('test:browser', ['browser:uncompressed', 'browser:maketests'], testkarma);
 
-  if (browser) {
-    gulp.task('test', function(callback) {
-      runsequence(['test:node'], ['test:browser'], callback);
-    });
-  } else {
+  if (!browser) {
     gulp.task('test', ['test:node']);
   }
 
@@ -137,7 +130,7 @@ function startGulp(node, name, opts) {
       browserifyCommand
     ]));
 
-    gulp.task('browser:compressed', ['browser:uncompressed'], function() {
+    gulp.task('browser:compressed', gulp.series(['browser:uncompressed'], function() {
       return gulp.src(fullname + '.js')
         .pipe(uglify({
           mangle: true,
@@ -146,15 +139,16 @@ function startGulp(node, name, opts) {
         .pipe(rename(fullname + '.min.js'))
         .pipe(gulp.dest('.'))
         .on('error', console.error);
-    });
+    }));
 
     gulp.task('browser:maketests', shell.task([
       'find test/ -type f -name "*.js" | xargs ' + browserifyPath + ' -t brfs -o tests.js'
     ]));
 
-    gulp.task('browser', function(callback) {
-      runsequence(['browser:compressed'], callback);
-    });
+    gulp.task('browser', gulp.series(['browser:compressed']));
+
+    gulp.task('test:browser', gulp.series(['browser:uncompressed', 'browser:maketests'], testkarma));
+    gulp.task('test', gulp.series(['test:node'], ['test:browser']));
   }
 
   /**
@@ -169,9 +163,9 @@ function startGulp(node, name, opts) {
 
   gulp.task('coverage', shell.task([istanbulPath + ' cover ' + mochaPath + ' -- --recursive']));
 
-  gulp.task('coveralls', ['coverage'], function() {
+  gulp.task('coveralls', gulp.series(['coverage'], function() {
     gulp.src('coverage/lcov.info').pipe(coveralls());
-  });
+}));
 
   /**
    * watch tasks
@@ -295,17 +289,17 @@ function startGulp(node, name, opts) {
       }));
   };
 
-  gulp.task('release:add-signed-files', ['release:sign-built-files'], addFiles);
+  gulp.task('release:add-signed-files', gulp.series(['release:sign-built-files'], addFiles));
   gulp.task('release:add-built-files', addFiles);
 
   if (browser) {
-    gulp.task('release:build-commit', [
+    gulp.task('release:build-commit', gulp.series([
       'release:add-signed-files'
-    ], buildCommit);
+    ], buildCommit));
   } else {
-    gulp.task('release:build-commit', [
+    gulp.task('release:build-commit', gulp.series([
       'release:add-built-files'
-    ], buildCommit);
+    ], buildCommit));
   }
 
   gulp.task('release:version-commit', function() {
@@ -338,7 +332,7 @@ function startGulp(node, name, opts) {
   // requires https://hub.github.com/
   var release = function(importance, cb) {
     var bumper = 'release:bump:' + importance;
-    return runsequence(
+    return gulp.series([
       // Checkout the release temporal branch
       'release:checkout-releases',
       // Run npm install
@@ -364,7 +358,8 @@ function startGulp(node, name, opts) {
       // Push to master
       'release:push',
       // remove release branch
-      'release:cleanup',
+      'release:cleanup'
+  ],
       cb);
   };
 
@@ -376,7 +371,7 @@ function startGulp(node, name, opts) {
       bump_version(importance);
     });
   });
-  gulp.task('release', ['release:patch']);
+  gulp.task('release', gulp.series(['release:patch']));
 
 
 
