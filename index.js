@@ -32,7 +32,6 @@
 var gulp = require('gulp');
 
 var coveralls = require('@kollavarsham/gulp-coveralls');
-var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var rename = require('gulp-rename');
@@ -70,7 +69,6 @@ function startGulp(node, name, opts) {
 
   var browserifyPath = buildBinPath + 'browserify';
   var karmaPath = buildBinPath + 'karma';
-  var platoPath = buildBinPath + 'plato';
   var istanbulPath = buildBinPath + 'nyc';
   var mochaPath = buildBinPath + '_mocha';
 
@@ -85,10 +83,6 @@ function startGulp(node, name, opts) {
 
   if (!fs.existsSync(istanbulPath)) {
     istanbulPath = './node_modules/.bin/nyc';
-  }
-
-  if (!fs.existsSync(platoPath)) {
-    platoPath = './node_modules/.bin/plato';
   }
 
   if (!fs.existsSync(mochaPath)) {
@@ -151,7 +145,7 @@ function startGulp(node, name, opts) {
         }))
         .pipe(rename(fullname + '.min.js'))
         .pipe(gulp.dest('.'))
-        .on('error', gutil.log);
+        .on('error', console.error);
     });
 
     gulp.task('browser:maketests', shell.task([
@@ -172,8 +166,6 @@ function startGulp(node, name, opts) {
       .pipe(jshint())
       .pipe(jshint.reporter('default'));
   });
-
-  gulp.task('plato', shell.task([platoPath + ' -d report -r -l .jshintrc -t ' + fullname + ' lib']));
 
   gulp.task('coverage', shell.task([istanbulPath + ' cover ' + mochaPath + ' -- --recursive']));
 
