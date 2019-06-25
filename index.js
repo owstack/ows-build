@@ -31,7 +31,7 @@
 
 var gulp = require('gulp');
 
-var coveralls = require('gulp-coveralls');
+var coveralls = require('@kollavarsham/gulp-coveralls');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
