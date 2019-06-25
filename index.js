@@ -71,7 +71,7 @@ function startGulp(node, name, opts) {
   var browserifyPath = buildBinPath + 'browserify';
   var karmaPath = buildBinPath + 'karma';
   var platoPath = buildBinPath + 'plato';
-  var istanbulPath = buildBinPath + 'istanbul';
+  var istanbulPath = buildBinPath + 'nyc';
   var mochaPath = buildBinPath + '_mocha';
 
   // newer version of node? binaries are in lower level of node_module path
@@ -84,7 +84,7 @@ function startGulp(node, name, opts) {
   }
 
   if (!fs.existsSync(istanbulPath)) {
-    istanbulPath = './node_modules/.bin/istanbul';
+    istanbulPath = './node_modules/.bin/nyc';
   }
 
   if (!fs.existsSync(platoPath)) {
